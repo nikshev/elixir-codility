@@ -15,15 +15,37 @@ defmodule CyclicRotation do
   """
 
   @doc """
-  Hello world.
+  solution for cyclic rotation
 
   ## Examples
 
-      iex> CyclicRotation.hello()
-      :world
+      iex> CyclicRotation.solution([3, 8, 9, 7, 6], 3)
+      [9, 7, 6, 3, 8]
+
+      iex> CyclicRotation.solution([3, 8, 9, 7, 6], 4)
+      [8, 9, 7, 6, 3]
+
+      iex> CyclicRotation.solution([3, 8, 9, 7, 6], 5)
+      [3, 8, 9, 7, 6]
+
+      iex> CyclicRotation.solution([3, 8, 9, 7, 6], 6)
+      [3, 8, 9, 7, 6]
 
   """
-  def hello do
-    :world
+
+  def solution(arr, k) do
+    case length(arr) - k do
+      x when x > 0 ->
+        rotate(arr, k)
+
+      _ ->
+        arr
+    end
+  end
+
+  def rotate(arr, k) do
+    head = Enum.drop(arr, length(arr) - k)
+    tail = Enum.drop(arr, -1 * k)
+    head ++ tail
   end
 end
