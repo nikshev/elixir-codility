@@ -36,11 +36,24 @@ defmodule OddOccurrencesInArray do
 
   ## Examples
 
-      iex> OddOccurrencesInArray.hello()
-      :world
+      iex> OddOccurrencesInArray.solution([9,3,9,3,9,7,9])
+      [7]
 
+      iex> OddOccurrencesInArray.solution([9,3,9,3,9,7,9,1])
+      [7,1]
+
+      iex> OddOccurrencesInArray.solution([9,3,9,3,9,7,9,1,1,2])
+      [7,2]
   """
-  def hello do
-    :world
+  def solution(arr) do
+    Enum.map(arr, fn x ->
+      {x, Enum.count(arr, &(&1 == x))}
+    end)
+    |> Enum.filter(fn {_value, count} ->
+      count == 1
+    end)
+    |> Enum.map(fn {value, _count} ->
+      value
+    end)
   end
 end
